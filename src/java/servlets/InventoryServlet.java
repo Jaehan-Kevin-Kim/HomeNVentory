@@ -68,46 +68,7 @@ public class InventoryServlet extends HttpServlet {
         try {
             switch (action) {
                 case "addItem":
-                    int categoryId = 0;
-
-                    try {
-                        switch (category) {
-                            case "kitchen":
-                                categoryId = 1;
-                                break;
-                            case "bathroom":
-                                categoryId = 2;
-                                break;
-                            case "living room":
-                                categoryId = 3;
-                                break;
-                            case "basement":
-                                categoryId = 4;
-                                break;
-                            case "bedrooom":
-                                categoryId = 5;
-                                break;
-                            case "garage":
-                                categoryId = 6;
-                                break;
-                            case "office":
-                                categoryId = 7;
-                                break;
-                            case "utility room":
-                                categoryId = 8;
-                                break;
-                            case "storage":
-                                categoryId = 9;
-                                break;
-                            case "other":
-                                categoryId = 10;
-                                break;
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    inventoryService.insert(name, Double.parseDouble(price), email, categoryId);
+                    inventoryService.insert(name, Double.parseDouble(price), email, Integer.parseInt(category));
                     request.setAttribute("msg", "Item added.");
                     break;
                 case "delete":

@@ -61,8 +61,8 @@
             <form action="inventory" method="post">
                 <span>Category: </span>
                 <select name="categories" value="">
-                    <c:forEach items="${categories}" var="category">
-                        <option name="category" value ="${category.categoryName}">${category.categoryName}</option>
+                    <c:forEach items="${categories}" var="category">                
+                            <option name="category" value ="${category.categoryId}">${category.categoryName}</option>
                     </c:forEach>
                 </select> <br />
                 <span>Name: </span>
