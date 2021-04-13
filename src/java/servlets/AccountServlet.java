@@ -24,14 +24,24 @@ public class AccountServlet extends HttpServlet {
         AccountService accountService = new AccountService();
         try {
             HttpSession session = request.getSession();
+            session.setAttribute("accountPage", "accountPage");
+            session.setAttribute("inventoryPage", null);
             String email = (String) session.getAttribute("email");
             User user = accountService.get(email);
             request.setAttribute("user", user);
+            
+//             if (user.getActive() == false){
+//                 response.sendRedirect("login");
+//                 return;
+//             }
                
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+       
+        
         getServletContext().getRequestDispatcher("/WEB-INF/account.jsp").forward(request, response);
     }
 

@@ -28,7 +28,8 @@ public class AdminFilter implements Filter {
         HttpSession session = httpRequest.getSession();
 
         String email = (String) session.getAttribute("email");
-
+        String inventoryPage = (String) session.getAttribute("inventoryPage");
+        String accountPage = (String) session.getAttribute("accountPage");
         UserDB userDB = new UserDB();
         User user;
         try {
@@ -39,8 +40,15 @@ public class AdminFilter implements Filter {
                 chain.doFilter(request, response);
             } else {
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
-                httpResponse.sendRedirect("inventory");
-                return;
+                if (inventoryPage != null) {
+                    httpResponse.sendRedirect("inventory");
+                    return;
+                } else if (accountPage != null) {
+                    httpResponse.sendRedirect("account");
+                    return;
+//                httpResponse.sendRedirect("inventory");
+//                return;
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(AdminFilter.class.getName()).log(Level.SEVERE, null, ex);

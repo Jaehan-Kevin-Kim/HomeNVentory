@@ -32,6 +32,7 @@ public class InventoryServlet extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             session.setAttribute("inventoryPage", "inventoryPage");
+            session.setAttribute("accountPage", null);
             String email = (String) session.getAttribute("email");
             User user = accountService.get(email);
             List<Item> items = inventoryService.getAll(email);

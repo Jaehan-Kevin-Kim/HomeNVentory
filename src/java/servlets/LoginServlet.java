@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,18 @@ public class LoginServlet extends HttpServlet {
         String logout = request.getParameter("logout");
         String inventoryPage = (String) session.getAttribute("inventoryPage");
         String adminPage = (String) session.getAttribute("adminPage");
+        String accountPage = (String) session.getAttribute("accountPage");
+        String email = (String) session.getAttribute("email");
+        
+        AccountService accountService = new AccountService();
+        try {
+            User user = accountService.get(email);
+            if (user.getActive() == false){
+                request.setAttribute("msg", "Your account is not active. Please contact to admin to revoke your status");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if (logout != null) {
             session.invalidate();
@@ -34,6 +48,9 @@ public class LoginServlet extends HttpServlet {
             return;
         } else if (inventoryPage != null) {
             response.sendRedirect("inventory");
+            return;
+        } else if (accountPage != null){
+            response.sendRedirect("account");
             return;
         }
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
