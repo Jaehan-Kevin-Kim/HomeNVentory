@@ -19,8 +19,13 @@
             Password: <input type="password" name="password" value="${password}"><br>
             <input type="submit" value="Log In">
         </form>
+     
         <div>
-            ${msg}
+            ${msg} <br />
+        </div>
+        <br />
+        <div>
+        <a href="register">Create an Account</a>
         </div>
     </body>
 </html>

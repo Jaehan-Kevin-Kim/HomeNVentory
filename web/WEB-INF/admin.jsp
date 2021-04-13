@@ -21,7 +21,7 @@
         </style> 
     </head>
     <body>
-        <h1>Home Inventory</h1>
+        <h1>Admin</h1>
         <section>
             <h4>Menu</h4>
             <ul>
