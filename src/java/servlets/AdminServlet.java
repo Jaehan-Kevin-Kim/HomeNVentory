@@ -47,6 +47,7 @@ public class AdminServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String password = request.getParameter("password");
         String action = request.getParameter("action");
+        
 
         try {
             switch (action) {
@@ -63,12 +64,18 @@ public class AdminServlet extends HttpServlet {
                     request.setAttribute("user", accountService.get(email));
                     break;
                 case "editUser":
+                    
                     String editEmail = request.getParameter("editEmail");
                     String editFirstName = request.getParameter("editFirstName");
                     String editLastName = request.getParameter("editLastName");
                     String editPassword = request.getParameter("editPassword");
+                    String active = request.getParameter("editActive");
+                    boolean activeUser = false;
+                    if (active != null){
+                        activeUser = true;
+                    }
                     User editUser = accountService.get(editEmail);
-                    accountService.update(editUser.getEmail(), editUser.getActive(), editFirstName, editLastName, editPassword, editUser.getRole().getRoleId());
+                    accountService.update(editUser.getEmail(), activeUser, editFirstName, editLastName, editPassword, editUser.getRole().getRoleId());
                     request.setAttribute("msg", "User: " + editEmail + " edited.");
                     break;
                 case "cancel":

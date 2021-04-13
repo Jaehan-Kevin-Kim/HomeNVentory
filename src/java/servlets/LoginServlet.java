@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
         try {
             User user = accountService.get(email);
             if (user.getActive() == false){
-                request.setAttribute("msg", "Your account is not active. Please contact to admin to revoke your status");
+                request.setAttribute("msg", "Your account is not active. Please contact to admin to reactive your status");
             }
         } catch (Exception ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
