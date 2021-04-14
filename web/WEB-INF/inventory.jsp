@@ -24,10 +24,11 @@
         <h1>Home Inventory</h1>
         <section>
             <h4>Menu</h4>
-            <ul>
+             <ul>
                 <li> <a href="inventory">Inventory</a></li>
                 <li> <a href="admin">Admin</a></li>
                 <li> <a href="account">Account</a></li>
+                <li> <a href="category">Category</a></li>
                 <li> <a href="login?logout">Logout</a></li>
             </ul>
         </section>

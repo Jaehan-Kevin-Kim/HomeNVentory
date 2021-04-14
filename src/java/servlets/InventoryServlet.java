@@ -41,6 +41,7 @@ public class InventoryServlet extends HttpServlet {
             request.setAttribute("categories", categories);
             request.setAttribute("user", user);
 
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

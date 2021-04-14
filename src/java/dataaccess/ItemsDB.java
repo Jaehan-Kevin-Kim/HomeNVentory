@@ -42,6 +42,7 @@ public class ItemsDB {
 
         try {
             User user = item.getOwner();
+                      
             user.getItemList().add(item);
             trans.begin();
             em.persist(item);
