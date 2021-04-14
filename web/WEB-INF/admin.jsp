@@ -83,20 +83,35 @@
                             <th><h4>Last Name</h4></th>
                             <th><h4>Password</h4></th>
                             <th><h4>Active</h4></th>
+                            <th><h4>Role</h4></th>
                         </tr>
                         <tr>    
                             <td><input type="text" value="${user.email}" name="editEmail" readonly></td>
                             <td><input type="text" value="${user.firstName}" name="editFirstName"></td>
                             <td><input type="text" value="${user.lastName}" name="editLastName"></td>
                             <td><input type="password" value="${user.password}" name="editPassword"></td>
-                            <c:choose>
-                            <c:when test="${user.active == true}"> 
-                                <td><input type="checkbox" checked  value="checked" name="editActive"></td>
-                            </c:when>
-                            <c:otherwise>
-                                <td><input type="checkbox" name="editActive" value=""></td>                                
-                            </c:otherwise>
-                          </c:choose>
+                                <c:choose>
+                                    <c:when test="${user.active == true}"> 
+                                    <td><input type="checkbox" checked  value="checked" name="editActive"></td>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <td><input type="checkbox" name="editActive" value=""></td>                                
+                                    </c:otherwise>
+                                </c:choose>
+                            <td>
+                                <select name="editRole" value="">
+                                    <c:forEach items="${roles}" var="role">     
+                                        <c:choose>
+                                            <c:when test="${user.role.roleId == role.roleId}"> 
+                                                <option name="role" selected value ="${role.roleId}">${role.roleName}</option>
+                                          </c:when>
+                                          <c:otherwise>
+                                            <option name="role" value ="${role.roleId}">${role.roleName}</option>                             
+                                          </c:otherwise>
+                                         </c:choose>
+                                    </c:forEach>
+                                </select> <br />
+                            </td>    
                             <!--<td><input type="checkbox" checked  value="checked" name="editActive"></td>-->
                         </tr>
 

@@ -1,5 +1,6 @@
 package servlets;
 
+import dataaccess.RoleDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import models.Role;
 import models.User;
 import services.AccountService;
 
@@ -47,9 +49,14 @@ public class AdminServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String password = request.getParameter("password");
         String action = request.getParameter("action");
+        RoleDB roleDB = new RoleDB();
+        
+//        List<User> users = accountService.getAll();
+//            request.setAttribute("users", users);
         
 
         try {
+           
             switch (action) {
                 case "addUser":
                     accountService.insert(email, true, firstName, lastName, password, 2);
@@ -62,20 +69,32 @@ public class AdminServlet extends HttpServlet {
                 case "editActivation":
                     request.setAttribute("editActivation", "editActivation");
                     request.setAttribute("user", accountService.get(email));
+                    
+                    
+                    User user = accountService.get(email);
+      
+             List <Role> roles = roleDB.getAll();
+            request.setAttribute("roles", roles);
+            Role role = roleDB.get(user.getRole().getRoleId());
+            
+            request.setAttribute("role", role);
+                    
                     break;
                 case "editUser":
-                    
                     String editEmail = request.getParameter("editEmail");
                     String editFirstName = request.getParameter("editFirstName");
                     String editLastName = request.getParameter("editLastName");
                     String editPassword = request.getParameter("editPassword");
+//                    String editRole = request.getParameter("editRole");
                     String active = request.getParameter("editActive");
+                    String editRole = request.getParameter("editRole");
+                    
                     boolean activeUser = false;
                     if (active != null){
                         activeUser = true;
                     }
                     User editUser = accountService.get(editEmail);
-                    accountService.update(editUser.getEmail(), activeUser, editFirstName, editLastName, editPassword, editUser.getRole().getRoleId());
+                    accountService.update(editUser.getEmail(), activeUser, editFirstName, editLastName, editPassword, Integer.parseInt(editRole));
                     request.setAttribute("msg", "User: " + editEmail + " edited.");
                     break;
                 case "cancel":
@@ -87,8 +106,16 @@ public class AdminServlet extends HttpServlet {
         }
 
         try {
+            
+           
             List<User> users = accountService.getAll();
+//            User user = accountService.get(email);
             request.setAttribute("users", users);
+//             List <Role> roles = roleDB.getAll();
+//            request.setAttribute("roles", roles);
+//            Role role = roleDB.get(user.getRole().getRoleId());
+//            
+//            request.setAttribute("role", role);
 
         } catch (Exception e) {
             e.printStackTrace();
