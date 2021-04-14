@@ -20,19 +20,12 @@ public class CategoryService {
          
     }
 
-//    public void insert(String itemName, double price, String owner, int category) throws Exception {
-//        Item item = new Item(0, itemName, price);
-//        UserDB userDB = new UserDB();
-//        User user = userDB.get(owner);
-//        item.setOwner(user);
-//
-//        CategoriesDB categoriesDB = new CategoriesDB();
-//        Category categoryObj = categoriesDB.get(category);
-//        item.setCategory(categoryObj);
-//
-//        ItemsDB itemsDB = new ItemsDB();
-//        itemsDB.insert(item);
-//    }
+    public void insert(String categoryName) throws Exception {
+        Category category = new Category(0, categoryName);
+        CategoriesDB categoriesDB = new CategoriesDB();
+        categoriesDB.insert(category);
+   
+    }
 
     public void update(int categoryId, String categoryName) throws Exception {
         CategoriesDB categoriesDB = new CategoriesDB();

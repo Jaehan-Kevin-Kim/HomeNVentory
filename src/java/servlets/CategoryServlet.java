@@ -1,4 +1,3 @@
-
 package servlets;
 
 import dataaccess.CategoriesDB;
@@ -24,11 +23,10 @@ import services.CategoryService;
  */
 public class CategoryServlet extends HttpServlet {
 
-  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
 //        AccountService accountService = new AccountService();
         CategoriesDB categoriesDB = new CategoriesDB();
 
@@ -36,21 +34,17 @@ public class CategoryServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("categoryPage", "categoryPage");
             session.setAttribute("adminPage", null);
-                    
+
             List<Category> categories = categoriesDB.getAll();
             request.setAttribute("categories", categories);
-          
 
-            
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
     }
-    
 
-   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -59,25 +53,31 @@ public class CategoryServlet extends HttpServlet {
         CategoryService categoryService = new CategoryService();
         String action = request.getParameter("action");
         String categoryId = request.getParameter("categoryId");
-        
+        Category category;
+     
+                    
+
         try {
-             Category category = categoryService.get(Integer.parseInt(categoryId));
-               request.setAttribute("category", category);
+        
+            
             switch (action) {
-//                case "addCategory":
-//                    inventoryService.insert(name, Double.parseDouble(price), email, Integer.parseInt(category));
-//                    request.setAttribute("msg", "Item added.");
-//                    break;
-                 case "editActivation":
+                case "addCategory":
+                    String categoryName = request.getParameter("categoryName");
+                    categoryService.insert(categoryName);
+                    request.setAttribute("msg", "Category added.");
+                    break;
+                case "editActivation":
+                    category = categoryService.get(Integer.parseInt(categoryId));
+                    request.setAttribute("category", category);
                     request.setAttribute("editActivation", "editActivation");
 //                    request.setAttribute("user", accountService.get(email));
                     break;
-                case "editCategory":                  
-         
-                    
+                case "editCategory":
+                    category = categoryService.get(Integer.parseInt(categoryId));
+                    request.setAttribute("category", category);
+
                     String editCategoryName = request.getParameter("editCategoryName");
 
-                   
                     categoryService.update(category.getCategoryId(), editCategoryName);
                     request.setAttribute("msg", "Category is edited.");
                     break;
@@ -95,10 +95,8 @@ public class CategoryServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         getServletContext().getRequestDispatcher("/WEB-INF/category.jsp").forward(request, response);
     }
-
-    
 
 }

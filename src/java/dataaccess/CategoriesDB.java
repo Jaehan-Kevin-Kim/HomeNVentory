@@ -36,26 +36,24 @@ public class CategoriesDB {
         }
     }
     
-//    public void insert (Category category) throws Exception{
-//            EntityManager em = DBUtil.getEmFactory().createEntityManager();
-//        EntityTransaction trans = em.getTransaction();
-//
-//        try {
-////            Category category
-//            Item item = category.getItemList().add(category);
-//            Category category = item.getCategory().add(category);
-//            User user = item.getOwner();
-//            user.getItemList().add(item);
-//            trans.begin();
-//            em.persist(item);
-//            em.merge(user);
-//            trans.commit();
-//        } catch (Exception ex) {
-//            trans.rollback();
-//        } finally {
-//            em.close();
-//        }
-//    }
+    public void insert (Category category) throws Exception{
+            EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+
+        try {
+            
+           List<Category> categories = em.createNamedQuery("Category.findAll", Category.class).getResultList();
+//           Item item = category.getItemList();
+           categories.add(category);
+            trans.begin();
+            em.persist(category);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
     
     public void update(Category category) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

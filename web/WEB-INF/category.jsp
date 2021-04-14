@@ -78,25 +78,18 @@
             </section>
         </c:if>
             
-            <!--
-            <section>
-                <h3>Add Item</h3>
-                <form action="inventory" method="post">
-                    <span>Category: </span>
-                    <select name="categories" value="">
-                        <c:forEach items="${categories}" var="category">                
-                            <option name="category" value ="${category.categoryId}">${category.categoryName}</option>
-                        </c:forEach>
-                    </select> <br />
-                    <span>Name: </span>
-                    <input type="text" name="name"/> <br />
-                    <span>Price: </span>
-                    <input type="text" name="price"/> <br />
-                    <input type="submit" name="save" value="Save" /> <br />
-                    <input type="hidden" name="action" value="addItem" /> <br />
-                </form>
-            </section>
-            -->
+          <section>
+            <h3>Add Category</h3>
+            <form action="category" method="post">
+                <span>Category: </span>
+                <input type="text" name="categoryName"/> <br />
+                <input type="submit" name="save" value="Save" /> <br />
+                <input type="hidden" name="action" value="addCategory" /> <br />
+            </form>
+        </section>
+        <div>
+            ${msg}
+        </div>
 
 
     </body>
