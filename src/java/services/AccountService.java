@@ -107,7 +107,7 @@ public class AccountService {
         {
             User user = userDB.getByUUID(uuid);
             user.setPassword(password);
-            user.setResetPasswordUuid("null");
+//            user.setResetPasswordUuid("null");
             userDB.update(user);
             return true;
         }

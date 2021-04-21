@@ -40,7 +40,7 @@ public class ResetPasswordServlet extends HttpServlet {
         String uuid = (String) request.getParameter("uuid");
         String newPassword = (String) request.getParameter("newPassword");
 
-        System.out.println("UUID: " + uuid);
+//        System.out.println("UUID: " + uuid);
 
         if (uuid != null)
         {
