@@ -56,6 +56,10 @@
         <servlet-name>CategoryServlet</servlet-name>
         <servlet-class>servlets.CategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <servlet-class>servlets.ResetPasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>InventoryServlet</servlet-name>
         <url-pattern>/inventory</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>CategoryServlet</servlet-name>
         <url-pattern>/category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <url-pattern>/rest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

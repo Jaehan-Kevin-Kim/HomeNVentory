@@ -27,6 +27,7 @@
         <br />
         <div>
         <a href="register">Create an Account</a>
+                <a href="reset">Forgot password</a>
         </div>
     </body>
 </html>
