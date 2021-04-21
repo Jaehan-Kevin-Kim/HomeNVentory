@@ -26,7 +26,7 @@
         </div>
         <br />
         <div>
-        <a href="register">Create an Account</a>
+            <a href="register">Create an Account</a> <br>
                 <a href="reset">Forgot password</a>
         </div>
     </body>

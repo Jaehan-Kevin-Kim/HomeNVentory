@@ -3,6 +3,9 @@ package services;
 import dataaccess.RoleDB;
 import dataaccess.UserDB;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Role;
 import models.User;
 
@@ -69,4 +72,49 @@ public class AccountService {
         userDB.delete(user);
 
     }
+    
+    
+    public void resetPassword (String email, String path, String url) {
+        try
+        {
+            UserDB userDB = new UserDB();
+            User user = userDB.get(email);
+            
+            String uuid = UUID.randomUUID().toString();
+            user.setResetPasswordUuid(uuid);
+            userDB.update(user);
+            String link = url + "?uuid=" + uuid;
+            
+            try
+            {
+                GmailService.sendMail(email, "Home Inventory Reset Password", "Hi " + user.getFirstName() + ", \n Please click on the following link to reset your password: " + link, false);
+            }
+            catch (Exception e)
+            {
+                Logger.getLogger(AccountService.class.getName()).log(Level.INFO, "Error sending email", email);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean changePassword(String uuid, String password) {
+        UserDB userDB = new UserDB();
+
+        try
+        {
+            User user = userDB.getByUUID(uuid);
+            user.setPassword(password);
+            user.setResetPasswordUuid("null");
+            userDB.update(user);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
 }
