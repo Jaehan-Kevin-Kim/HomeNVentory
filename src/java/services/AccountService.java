@@ -50,6 +50,19 @@ public class AccountService {
         UserDB userDB = new UserDB();
         userDB.insert(user);
     }
+    public void register(String email, String firstname, String url){
+        String uuid = UUID.randomUUID().toString();
+        String link = url + "?uuid=" + uuid;
+         
+            try
+            {
+                GmailService.sendMail(email, "Home Inventory Account Activation", "Hi " + firstname + ", \n Please click on the following link to activate your account: " + link, false);
+            }
+            catch (Exception e)
+            {
+                Logger.getLogger(AccountService.class.getName()).log(Level.INFO, "Error sending email", email);
+            }
+            }
 
     public void update(String email, boolean active, String firstName, String lastName, String password, int roleId) throws Exception {
         UserDB userDB = new UserDB();
