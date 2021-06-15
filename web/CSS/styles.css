@@ -1,11 +1,12 @@
 * {
     margin : 0;
-    
+
 }
 
-@media only screen and (max-width: 800px){
 body {
     background-color: red;
-    max-width: 800px;
 }
-}
+
+/*@media only screen and (max-width: 800px){
+
+}*/
